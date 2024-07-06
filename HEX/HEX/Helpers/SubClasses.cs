@@ -37,7 +37,12 @@ namespace HEX.HEX.Helpers
     }
     public class Communication
     {
-        public ResponseStatus StatusS { get; set; }
+        public ResponseStatus Status { get; set; }
+    }
+    public class Files
+    {
+        public ResponseStatus Status { get; set; }
+        public FilesType FilesType { get; set; }
     }
     public class Kaizen
     {
@@ -47,7 +52,6 @@ namespace HEX.HEX.Helpers
     {
         public ResponseStatus Status { get; set; }
     }
-
     public enum ResponseStatus
     {
         Success,
@@ -56,6 +60,11 @@ namespace HEX.HEX.Helpers
         UnexpectedFailure,
         AuthenticationFailed,
         IncorrectCredentials,
-        UsernameTaken,
+        Taken,
+        Available,
+    }
+    public enum FilesType
+    {
+        ProfilePicture
     }
 }

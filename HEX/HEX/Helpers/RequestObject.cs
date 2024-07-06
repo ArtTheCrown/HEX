@@ -13,6 +13,7 @@ namespace HEX.HEX.Helpers
         public Authentication? Authentication { get; set; }
         public Registration? Registration { get; set; }
         public Communication? Communication { get; set; }
+        public Files? Files { get; set; }
         public Kaizen? Kaizen { get; set; }
         public Report? Report { get; set; }
     }

@@ -9,9 +9,11 @@ namespace HEX.HEX.Helpers
     public class ResponseObject
     {
         public Response? Response { get; set; }
+        public System? System { get; set; }
         public Authentication? Authentication { get; set; }
         public Registration? Registration { get; set; }
         public Communication? Communication { get; set; }
+        public Files? Files { get; set; }
         public Kaizen? Kaizen { get; set; }
         public Report? Report { get; set; }
     }

@@ -95,7 +95,7 @@ namespace HEX.HEX.Helpers
                     return 1255056967655751790;
             }
         }
-        public static async Task HandleRequestAsync(RequestObject request)
+        public static async Task HandleRequestAsync(RequestObject request, DiscordMessage discordMessage)
         {
             switch (request.Request?.RequestType)
             {
@@ -122,6 +122,9 @@ namespace HEX.HEX.Helpers
                     break;
                 case RequestType.Debug:
                     await RequestsHandler.DebugAsync(request);
+                    break;
+                case RequestType.Files:
+                    await RequestsHandler.FilesAsync(request, discordMessage);
                     break;
                 default:
                     await RequestsHandler.DebugAsync(request);

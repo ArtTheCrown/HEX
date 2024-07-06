@@ -25,7 +25,7 @@ namespace HEX.HEX.Services
 
             if(!await CheckUsernameAvailabilityAsync(user.UserID))
             {
-                return (false, ResponseStatus.UsernameTaken);
+                return (false, ResponseStatus.Taken);
             }
 
             try

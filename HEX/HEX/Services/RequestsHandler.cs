@@ -1,4 +1,5 @@
-﻿using HEX.HEX.Helpers;
+﻿using DSharpPlus.Entities;
+using HEX.HEX.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -107,7 +108,7 @@ namespace HEX.HEX.Services
 
             return false;
         }
-        public static async Task<bool> FilesAsync(RequestObject request)
+        public static async Task<bool> FilesAsync(RequestObject request, DiscordMessage discordMessage)
         {
 
             return false;

@@ -86,8 +86,7 @@ namespace HEX.HEX.Services
         {
             var request = await DCServerSupport.DeserializeRequestObjectAsync(e.Message.Content);
 
-            Debug.WriteLine(e.Message.Content);
-            await DCServerSupport.HandleRequestAsync(request);
+            await DCServerSupport.HandleRequestAsync(request, e.Message);
         }
 
         public static async Task<bool> HandleResponseAsync(ResponseObject response)
