@@ -3,7 +3,9 @@ using HEX.HEX.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -110,7 +112,48 @@ namespace HEX.HEX.Services
         }
         public static async Task<bool> FilesAsync(RequestObject request, DiscordMessage discordMessage)
         {
+            if (request.Files?.FilesType == FilesType.ProfilePicture)
+            {
+                string url = discordMessage.Attachments[0].Url;
+                var _user = request.Authentication?.User;
+                var jsonReader = new JSONReader();
+                await jsonReader.ReadJSON();
+                var engine = new DBEngine(jsonReader.connectionString);
+                var result = await engine.GetUserByAuthenticationAsync(_user.UserID, _user.Password);
 
+                if (result.Item1)
+                {
+                    try
+                    {
+                        // Define the path to save the file
+                        string folderPath = "Data/ProfilePictures/";
+                        string filePath = Path.Combine(folderPath, $"{_user.Username}_pfp.png");
+
+                        // Ensure the directory exists
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                        }
+
+                        // Download the file
+                        using (HttpClient client = new HttpClient())
+                        using (HttpResponseMessage response = await client.GetAsync(url))
+                        using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
+                        using (Stream streamToWriteTo = File.Open(filePath, FileMode.Create))
+                        {
+                            await streamToReadFrom.CopyToAsync(streamToWriteTo);
+                        }
+
+                        // You can add additional logic here if needed after saving the file
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log or handle the exception as needed
+                        Console.WriteLine($"An error occurred: {ex.Message}");
+                    }
+                }
+            }
             return false;
         }
     }
