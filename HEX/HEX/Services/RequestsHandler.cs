@@ -110,6 +110,7 @@ namespace HEX.HEX.Services
 
             return false;
         }
+
         public static async Task<bool> FilesAsync(RequestObject request, DiscordMessage discordMessage)
         {
             if (request.Files?.FilesType == FilesType.ProfilePicture)
@@ -125,8 +126,11 @@ namespace HEX.HEX.Services
                 {
                     try
                     {
-                        // Define the path to save the file
-                        string folderPath = "Data/ProfilePictures/";
+                        // Get the base directory of the application
+                        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+                        // Define the path to save the file relative to the base directory
+                        string folderPath = Path.Combine(baseDirectory, "Data/ProfilePictures/");
                         string filePath = Path.Combine(folderPath, $"{_user.Username}_pfp.png");
 
                         // Ensure the directory exists
