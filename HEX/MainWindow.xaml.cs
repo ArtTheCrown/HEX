@@ -19,6 +19,7 @@ namespace HEX
         public MainWindow()
         {
             InitializeComponent();
+            this.Visibility = Visibility.Collapsed;
         }
     }
 }

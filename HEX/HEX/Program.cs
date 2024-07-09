@@ -20,15 +20,15 @@ namespace HEX.HEX
 
         public static async Task<bool> Respond(ResponseObject response)
         {
-            string str = response.Response.RequestType == RequestType.Authentication? "Authentication"  : "Registration";
-            string reqresult = response.Response.RequestType == RequestType.Authentication ? response.Authentication.status : response.Registration.status;
+            ResponseStatus res = response.Response.RequestType == RequestType.Authentication? response.Authentication.Status : response.Registration.Status;
+
 
             var result = await DCServer.HandleResponseAsync(response);
 
-            string respresult = result ? "Success" : "Failure";
+            ResponseStatus respresult = result ? ResponseStatus.Success : ResponseStatus.Failure;
 
 
-            Console.WriteLine($"[+] {str} : [{reqresult}] : ({respresult})");
+            //Console.WriteLine($"[+] {str} : [{reqresult}] : ({respresult})");
 
             return result;
         }
